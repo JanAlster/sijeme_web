@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "terminy", to: "application#terminy"
   get "kontakt", to: "application#kontakt"
   get "podminky", to: "application#podminky"
+  post "kontakt", to: "application#posli_kontakt"
   
   resources :clanky
   

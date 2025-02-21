@@ -1,2 +1,43 @@
-<h1>Home#Kontakt</h1>
+<div class="container mt-4">
 
+<h1>Přihlášky a dotazy ke kurzům</h1>
+
+ <div class="row align-items-md-stretch">
+<!-- map -->
+<div class="col-md-6">
+<iframe style="border:none" src="https://frame.mapy.cz/s/nesometoga" width="400" height="280" frameborder="0"></iframe>
+</div>
+<!-- map -->
+
+
+<!-- contact form -->
+<div class="col-md-6">
+<div class="kontakt">
+<%= form_with(url: "/kontakt", local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label "Jméno a příjmení", class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "Email", class: 'form-label' %>
+    <%= form.email_field :email, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "Text zprávy", class: 'form-label' %>
+    <%= form.text_area :message, class: 'form-control', rows: 5, required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit 'Odeslat zprávu', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+</div>
+</div>
+<!-- contact form -->
+
+</div>
+
+</div>

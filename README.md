@@ -89,6 +89,7 @@ To customize the HTML rendered for embedded images and other attachments (known 
 
 
 TODO
+- commit to git more often... (well I am playing around for now...)
 -adjust margins of elements
 - prepare smaller versions of images, they are too large...
 - add Obchodni podminky

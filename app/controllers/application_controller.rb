@@ -26,6 +26,29 @@ class ApplicationController < ActionController::Base
   def podminky
   end
 
+  def posli_kontakt
+    # puts params
+    # {"authenticity_token" => "DE8vOyQrLSIyEn4uEBK653PkcalMkqznJbxcOKZ7kEkiijikPk1UH0Gr5hLvnMmBk80Z74BC4rRvSwtkjDSHjA", "name" => "ddd", "email" => "alster@post.cz", "message" => "fff", "commit" => "Odeslat zprávu", "controller" => "application", "action" => "posli_kontakt"}
+    # does not have view, so no rendering 
+    
+    @contact = Contact.new(name: params[:name], email: params[:email], message: params[:message])
+    WebFormMailer.mail_to_admin(@contact).deliver_now()
+    #WebFormMailer.send(Contact.new(params.slice(:name, :email, :message)))  # ForbiddenAttributes error (still cannot figure that one out)
+    
+    """
+    @contact = Contact.new(contact_params)
+
+    if @contact.valid?
+      # Here you would typically send the email (not implemented in this simple form)
+      # Example: ContactMailer.send_contact(@contact).deliver_now
+      flash[:success] = 'Your message has been sent successfully!'
+      redirect_to new_contact_path
+    else
+      flash.now[:error] = 'Please fix the errors below.'
+      render :new
+    end
+    """
+  end
   private 
   
   # these will be in navbar
