@@ -1,0 +1,7 @@
+.thumbnail {
+  display: block;
+  margin: 0 auto; /* Center horizontally */
+  max-width: 100%;
+   border-radius: 8px;
+}
+

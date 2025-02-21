@@ -1,0 +1,13 @@
+<div class="container mt-4"> 
+
+<h1><%= @clanek.titul %></h1>
+<%= @clanek.telo_clanku %>
+</div>
+
+<%#= link_to "Zpět", "/clanky" %>
+
+<% if authenticated? %>
+  <%= link_to "Uprav", edit_clanky_path(@clanek) %>
+  <%= button_to "Smazat", url_for(controller: "clanky", action: "destroy", id: @clanek.id), method: :delete, data: { turbo_confirm: "Jste si jistí, že chcete smazat článek #{@clanek.titul}?" }, class:"btn btn-danger" %>
+<% end %>
+

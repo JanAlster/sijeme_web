@@ -1,0 +1,16 @@
+<div class="container mt-4">
+<h1>Clanky</h1>
+
+<div id="clanky">
+  <% @clanky.each do |clanek| %>
+    <div>
+      <a href="/clanky/<%= clanek.id %>">
+        <%= clanek.titul %>
+      </a>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "Nový článek", new_clanky_path if authenticated? %>
+</div>
+

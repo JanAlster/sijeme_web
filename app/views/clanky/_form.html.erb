@@ -1,0 +1,17 @@
+<%= form_with( model: clanek, url: "/clanky") do |form| %>
+ 
+  <div>
+    <%= form.label :titul %>
+    <%= form.text_field :titul %>
+  </div>
+
+  <div>
+    <%= form.label :telo_clanku, style: "display: block" %>
+    <%= form.rich_text_area :telo_clanku %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+

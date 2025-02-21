@@ -1,0 +1,18 @@
+.bg-hero {
+  background: url('potreby.webp') no-repeat center center;
+  background-size: cover; /* Adjust as needed */
+  height: auto; /* Full viewport height */
+  min-height: 600px; 
+}
+
+.bg-hero h1, .bg-hero h4{
+color: #dbdbdb;; /* Adjust text color for readability */
+font-weight: bold;
+ text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+
+
+.hero-mask {
+ style="background-color: rgba(0, 0, 0, 0.6);
+  }
