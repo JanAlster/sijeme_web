@@ -1,2 +1,62 @@
-<h1>Home#terminy</h1>
+<div class="container mt-4">
+ <div class="row align-items-md-stretch">
+   <div class="col-md-6">
+     <h2>Termíny kroužku</h2>
+     
+     <hr class="hr hr-blurry" />
+     
+     
+<h3>Dospělí</h3>
 
+<p>Zahájení:  středa 26. února 2025 od 18:30 do 21:30</p>
+
+<p> <%# nope, table is rather ugly here, will try with span %>
+<table class="table">
+  <tr>
+    <td>Další lekce vždy ve středu:</td>
+    <td>19. března</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>    9. dubna </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>    23. dubna </td>
+  </tr>
+</table>
+                                             </p>
+<p><em>Další termíny pro dospělé připravujeme</em></p>
+<h3>Děti - připravujeme</h3>
+
+
+   </div>
+   
+   <div class="col-md-6">
+     <h2>Ceník</h2>
+     <hr class="hr hr-blurry" />
+     
+     <table class="table">
+  <tr>
+    <td>Standardní lekce (3 hodiny)</td>
+    <td> 990 Kč</td>
+  </tr>
+  <tr>
+    <td>Kroužek (4 lekce)</td>
+    <td>    3960 Kč </td>
+  </tr>
+  <tr>
+    <td><strong>Nyní cena pro první běh kroužku</strong></td>
+    <td>   <strong> 3560 Kč</strong></td>
+  </tr>
+</table>
+
+<%= button_to "Přihláška do kroužku", url_for(controller: :application, action: :kontakt), method: :get, class:"btn btn-primary mt-4" %>  
+
+   </div>
+ 
+ </div>
+
+
+
+</div>

@@ -91,12 +91,16 @@ To customize the HTML rendered for embedded images and other attachments (known 
 TODO
 - novy clanek odkazuje form na spatny link, protoe jeste nema id a s id nil to nefunguje
 
+- adjust form to allow selecting subject and filling in the billing address
+
+-not so sure if I want to commit images to git... (but not all images are in database)
 
 - commit to git more often... (well I am playing around for now...)
 -adjust margins of elements
+
 - prepare smaller versions of images, they are too large...
-- add Obchodni podminky
-- adjust visuals for obchodni podminky na spodni liste
+
+- adjust visuals for obchodni podminky 
 
 Mozna nejaky nenapadny vstup do login?
 
