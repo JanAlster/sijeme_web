@@ -47,7 +47,7 @@ class ClankyController < ApplicationController
     end
 
     def clanek_params
-      params.expect(clanek: [ :titul, :telo_clanku])
+      params.expect(clanek: [ :titul, :telo_clanku, :featured_image])
     end
     
 end

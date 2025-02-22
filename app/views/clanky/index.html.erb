@@ -1,12 +1,17 @@
 <div class="container mt-4">
-<h1>Clanky</h1>
+<h1>Novinky</h1>
+<hr class="hr hr-blurry" />
 
 <div id="clanky">
   <% @clanky.each do |clanek| %>
-    <div>
-      <a href="/clanky/<%= clanek.id %>">
-        <%= clanek.titul %>
-      </a>
+    <div class="row align-items-md-stretch mt-4">
+      <div class="col-md-6">
+      <%= link_to image_tag(clanek.featured_image.attached? ? clanek.featured_image : 'Foto 7 orez.webp' , alt: clanek.titul, class: 'thumbnail thumbnail-mid'), "/clanky/#{clanek.id}"  %>
+      </div>
+      <div class="col-md-6">
+        <h2><a class="gentle-link" href="/clanky/<%= clanek.id %>"> <%= clanek.titul %> </a></h2>
+        <p><%=clanek.telo_clanku.to_plain_text.split("\n").first%></p>
+      </div>  
     </div>
   <% end %>
 </div>

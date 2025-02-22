@@ -5,3 +5,7 @@
    border-radius: 8px;
 }
 
+.thumbnail-mid {
+  max-width: 200px;
+}
+
