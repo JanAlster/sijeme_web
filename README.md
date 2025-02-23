@@ -24,6 +24,7 @@ Things you may want to cover:
 * ...
 
 ## Webpage Sijeme Praha 8 (technological demo)
+This is a "playing around to figure things out" kind of project. Might use something else in full version (like Shopify or Jekyll).
 
 ## Concept
 * ApplicationController is used to handle few static pages.
