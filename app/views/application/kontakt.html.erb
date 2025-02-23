@@ -5,13 +5,46 @@
  <div class="row align-items-md-stretch">
 <!-- map -->
 <div class="col-md-6">
-<iframe style="border:none" src="https://frame.mapy.cz/s/nesometoga" width="400" height="400" frameborder="0"></iframe>
+<iframe id="map_frame" style="border:none" src="https://frame.mapy.cz/s/nesometoga" width="570" height="780" frameborder="0"></iframe>
+<div id="fallback_map" style="display: none;">
+  <%= image_tag 'fallback_map.png', alt: 'Košťálkova 1104/4 Praha 8', class: 'fallback-map' %>
+</div>
+
+<script>
+  let iframe = document.getElementById("map_frame");
+  let fallback = document.getElementById("fallback_map");
+  
+  let isLoaded = false;
+
+  iframe.onload = function () {
+    isLoaded = true; // Mark iframe as loaded
+  };
+
+  setTimeout(function () {
+    if (!isLoaded) { 
+      iframe.style.display = "none"; 
+      fallback.style.display = "block";
+    }
+  }, 10000); // 10-second timeout
+</script>
+
 </div>
 <!-- map -->
 
 
 <!-- contact form -->
 <div class="col-md-6">
+
+<h4>Šijeme Praha 8</h4>
+
+<p>Mgr. Dana Smrčková</p>
+
+<p>
+Košťálkova 1104/4 Praha 8 </br>
+sijeme.praha8@gmail.com   </br>
++420 723 082 111
+</p>
+
 <div class="kontakt">
 <%= form_with(url: "/kontakt", local: true) do |form| %>
   <div class="form-group">
@@ -22,6 +55,34 @@
   <div class="form-group">
     <%= form.label "Email", class: 'form-label' %>
     <%= form.email_field :email, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group">
+   <label class="form-label"> Předmět e-mailu </label>
+   
+   <div class="form-check">
+        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" data-toggle-value="vseobecny_dotaz">
+        <label class="form-check-label" for="optionsRadios1">
+          Všeobecný dotaz
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios2" value="option2" data-toggle-value="prihlaska">
+        <label class="form-check-label" for="optionsRadios2">
+          Přihláška do kurzu (Dospělí - termín 26.2. - 23. 4. )  - chci zaslat fakturu
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="optionsRadios" id="optionsRadios3" value="option3" data-toggle-value="detsky_kurz">
+        <label class="form-check-label" for="optionsRadios3">
+          Kurz pro děti - připravujeme
+        </label>
+      </div>
+  </div>
+
+  <div class="form-group" data-toggle-group="prihlaska">
+    <%= form.label "Fakturační adresa", class: 'form-label' %>
+    <%= form.text_field :address, class: 'form-control', required: true %>
   </div>
 
   <div class="form-group">

@@ -5,9 +5,9 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version: ruby-3.4.2
 
-* System dependencies
+* System dependencies: libvips, rails-8.0.1
 
 * Configuration
 
@@ -23,170 +23,28 @@ Things you may want to cover:
 
 * ...
 
+## Webpage Sijeme Praha 8 (technological demo)
 
-Yes, but I will just use it for notes on design for now.
+## Concept
+* ApplicationController is used to handle few static pages.
+ * root/introduction
+ * about
+ * workshop dates
+ * contact with map (mapy.cz with little bit of scripting as a backup) and web form to send messages
+ * contract terms
+* ClankyController that manages "clanky" resource
+ * index page
+ * adding, updating and deleting individual articles
+* Contact model for logging/sending a message from web form on contact page (default rails mailer)
 
-We need a bunch of pages on top level (and switching to Czech, since this is a Czech web page).
-- Uvod
-- O nas
-- Novinky (blog)
-- Terminy a ceny
-- Kontakt
-
-Novinky budou obsahovat clanky
-
-- navic se asi bude hodit alespon jednoduchy redakcni system pro pridavani clanku
- (at to nemusim delat ja)
- 
- Vetsina stranek nema zadna data, takze nepotrebuje databazi. 
- Otazka je, jak to resit? 
- - Jeden home controller, ktery bude hazet ruzne outputy?
- - bude problem automaticky generovat linky pro hlavicku
- - muzeme to dat rovnou na application controller, ne?
- 
- V podstate se daji zahrnout tri databaze
-  - clanky do blogu (rails tutorial umoznuje rich-text editor, pry i s obrazky, takze to zkusime)
-  - zaznamy z kontaktu
-  - terminy kurzu
-  
-  
-Pravdepodobne spatny napad pouzivat ceska jmena pro modely do databaze, rails porad tvori pluraly s "s" na konci...
-
-
-Dalsi spanty napad je pouzivat primo ApplicationController bez version control, protoze 
-do nej rails dava systemove veci a muzu je omylem smazat, jako treba authentication.
-
-
-activetext nenahraval/nezobrazoval obrzky
- - chybele libvips
- - zkusil jsem to nainstalovat, coz ale znamena, ze to musi byt i na produkci
- - a uz to funguje
-
-ActiveText
- - omezene moznosti formatovani
- - jeden sloupec, mozne vkladat obrazky mezi odstavce
- - titulky jsou <h1> (coz je in hlavni titulek clanky v mem erb, ale to se da zmenit), dale pouziva
- <strong>, <emph>, a <figcaption>
- - otazka je jak to stylovat?
- - editor se jmenuje Trix:
- Styling Formatted Content
-
-To ensure what you see when you edit is what you see when you save, use a CSS class name to scope styles for Trix formatted content. Apply this class name to your <trix-editor> element, and to a containing element when you render stored Trix content for display in your application.
-
-<trix-editor class="trix-content"></trix-editor>
-
-<div class="trix-content">Stored content here</div>
-
-The default trix.css file includes styles for basic formatted content—including bulleted and numbered lists, code blocks, and block quotes—under the class name trix-content. We encourage you to use these styles as a starting point by copying them into your application’s CSS with a different class name.
-
-
-To customize the HTML container element that's rendered around rich text content, edit the app/views/layouts/action_text/contents/_content.html.erb layout file created by the installer:
-
-
-To customize the HTML rendered for embedded images and other attachments (known as blobs), edit the app/views/active_storage/blobs/_blob.html.erb template created by the installer:
+All pages have navigation bar on top (not all pages are linked directly) and a footer with some basic info.
+Some paths are only allowed for logged-in users (default Rails authentication with User model and SessionController).
+Some pages have extra content if the user is authenticated.
+Some very basic styling using bootstrap.
 
 
 
+# todo
+* optional "Address" field for web form (probably will be handled in different way in full version - that will require sing-up for applying to workshops which will contain the billing address and info web form will be left without it), corresponding field in Contact model (and database: rails generate migration AddAddressToContact address :string)
+* expose more of the user logging and/or registering; at the moment, users have to be added manually
 
-TODO
-- novy clanek odkazuje form na spatny link, protoe jeste nema id a s id nil to nefunguje
-
-- adjust form to allow selecting subject and filling in the billing address
-
--not so sure if I want to commit images to git... (but not all images are in database)
-
-- commit to git more often... (well I am playing around for now...)
--adjust margins of elements
-
-- prepare smaller versions of images, they are too large...
-
-- adjust visuals for obchodni podminky 
-
-Mozna nejaky nenapadny vstup do login?
-
-
-- add cookies notice - for now, we do not use them, but if we allow authorized user sections, we will need them (we will also need separate types of authorized users)
-
-
-
-
-access clanky by a slug
-Yes, in Rails, while the default behavior for routing and resource linking typically uses the model's `id`, you can customize this behavior to index resources by other attributes. Here's how you can achieve that:
-
-### **1️⃣ Using Custom Routes**
-You can create custom routes in your `config/routes.rb` file that map to your controller actions based on different attributes instead of the default `id`.
-
-#### **Example: Using a Slug**
-If you want to link to a resource by a slug (e.g., a unique attribute like a username or a title), you can do something like this:
-
-```ruby
-# config/routes.rb
-resources :posts, param: :slug
-```
-
-### **2️⃣ Modifying Controller Actions**
-In your controller, you would need to find the resource by the new parameter instead of the `id`.
-
-#### **Example Controller Action:**
-```ruby
-class PostsController < ApplicationController
-  def show
-    @post = Post.find_by(slug: params[:slug]) # Use slug instead of id
-    # Handle case where post is not found
-  end
-end
-```
-
-### **3️⃣ Updating Links in Views**
-When creating links to these resources in your views, make sure to use the correct parameter:
-
-#### **Example View:**
-```erb
-<%= link_to 'Show Post', post_path(post.slug) %>
-```
-
-### **4️⃣ Adding Slug Generation**
-If you're using slugs, you need to generate and store them when creating or updating the resource. You can add a `slug` attribute to your model and generate it using a callback:
-
-#### **Example Model:**
-```ruby
-class Post < ApplicationRecord
-  before_save :generate_slug
-
-  private
-
-  def generate_slug
-    self.slug = title.parameterize if title.present? # Convert title to a slug
-  end
-end
-```
-
-### **5️⃣ Using Unique Attributes Directly**
-If you want to link resources directly by some unique attribute (not just a slug), you can modify the routes and controller similarly. For example, if you wanted to find a user by their username:
-
-#### **Routes Example:**
-```ruby
-resources :users, param: :username
-```
-
-#### **Controller Example:**
-```ruby
-class UsersController < ApplicationController
-  def show
-    @user = User.find_by(username: params[:username])
-    # Handle case where user is not found
-  end
-end
-```
-
-### **6️⃣ Considerations**
-- **Uniqueness**: Ensure that the attribute you use for routing is unique for each resource.
-- **Performance**: Consider the performance implications of looking up records by attributes other than the primary key.
-- **SEO**: Using slugs or meaningful URLs can be beneficial for SEO.
-
-### **Summary**
-- You can customize Rails resource routing to use attributes other than the default `id` by modifying routes and controller actions.
-- Use slugs or other unique attributes to link to resources, ensuring proper lookups and updates in your controllers.
-- Update your views accordingly to generate the correct paths.
-
-If you have more questions or need further clarification, feel free to ask!

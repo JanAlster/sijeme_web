@@ -9,11 +9,14 @@ This can be specified as a symbol of the same name.
 
 Technically, the do ... end 'block' is the last argument of the form_with method.
 Internally, form_with will create a FormBuilder object and applies it to the block.
-(i.e. it does not return a FromBuilder object after all). The returned value is html code.
+(i.e. it does not return a FromBuilder object after all). 
+The returned value is html code. Which makes sense, because that is what we want here.
+
+Btw, with my naming convention, form_with will not guess url paths correctly.
 """%>
 
-<%= form_with( model: clanek, url: url_for(controller: "clanky", action: "show", id: clanek.id)) do |form| %>
- 
+
+<%= form_with( model: clanek, url: clanek.id.nil? ? clanky_index_path : clanek_path) do |form| %>
   <div>
     <%= form.label :titul %>
     <%= form.text_field :titul %>

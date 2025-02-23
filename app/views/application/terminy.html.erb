@@ -10,22 +10,29 @@
 
 <p>Zahájení:  středa 26. února 2025 od 18:30 do 21:30</p>
 
-<p> <%# nope, table is rather ugly here, will try with span %>
-<table class="table">
-  <tr>
-    <td>Další lekce vždy ve středu:</td>
-    <td>19. března</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>    9. dubna </td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>    23. dubna </td>
-  </tr>
-</table>
-                                             </p>
+<p> 
+<style>
+  .aligned-text {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
+  }
+</style>
+
+<div class="aligned-text">
+  <span>Další lekce vždy ve středu:</span> <span>19. března</span> 
+</div>
+
+<div class="aligned-text">
+  <span></span> <span> 9. dubna</span> 
+</div>
+
+<div class="aligned-text">
+  <span></span> <span> 23. dubna</span> 
+</div>
+
+</p>
+                                             
 <p><em>Další termíny pro dospělé připravujeme</em></p>
 <h3>Děti - připravujeme</h3>
 
@@ -51,8 +58,7 @@
   </tr>
 </table>
 
-<%= button_to "Přihláška do kroužku", url_for(controller: :application, action: :kontakt), method: :get, class:"btn btn-primary mt-4" %>  
-
+<%= button_to "Přihláška do kroužku", url_for(controller: :application, action: :kontakt), method: :get, class: "btn btn-primary" %>
    </div>
  
  </div>
